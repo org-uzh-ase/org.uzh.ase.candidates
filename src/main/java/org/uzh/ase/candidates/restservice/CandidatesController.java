@@ -9,7 +9,7 @@ import org.uzh.ase.candidates.model.Answer;
 public class CandidatesController {
 
     @GetMapping("/api/candidates")
-    public Answer getCandidates(@RequestParam(value = "movie_id") String movie_id, @RequestParam(value = "level", defaultValue = "1") int level) {
+    public Answer getCandidates(@RequestParam(value = "movie_id") String movieId, @RequestParam(value = "level", defaultValue = "1") int level) {
         return new Answer();
     }
 }
