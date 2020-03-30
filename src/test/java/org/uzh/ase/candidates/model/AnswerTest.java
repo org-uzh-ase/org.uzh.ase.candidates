@@ -14,4 +14,13 @@ public class AnswerTest {
         assertEquals("Movie 2", answer.getMovie2());
         assertEquals("Movie 3", answer.getMovie3());
     }
+
+    @Test
+    public void testInit(){
+        Answer answer = new Answer("Movie 1", "Movie 2", "Movie 3");
+
+        assertEquals("Movie 1", answer.getMovie1());
+        assertEquals("Movie 2", answer.getMovie2());
+        assertEquals("Movie 3", answer.getMovie3());
+    }
 }
