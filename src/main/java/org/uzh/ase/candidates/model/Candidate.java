@@ -1,5 +1,7 @@
 package org.uzh.ase.candidates.model;
 
+import java.util.Objects;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,8 +30,19 @@ public class Candidate {
         return posterURL;
     }
 
-    
-    public boolean equals(Candidate objCandidate) {
-        return this.id.equals(objCandidate.getId()) && this.posterURL.equals(objCandidate.getPosterURL());
+    @Override
+    public boolean equals(Object objCandidate) {
+        if (objCandidate == null) return false;
+        if (objCandidate == this) return true;
+        if (objCandidate instanceof Candidate) {
+            return  this.id.equals(((Candidate) objCandidate).getId()) && 
+                    this.posterURL.equals(((Candidate) objCandidate).getPosterURL());
+        }
+        else return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.posterURL);
     }
 }
