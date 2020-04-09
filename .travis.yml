@@ -7,7 +7,7 @@ addons:
     token:
       secure: $SONAR_TOKEN # encrypted value of your token
 before_script:
-  - sleep 15
+  - mongorestore -d movies src/main/resources/movies
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean verify sonar:sonar -Dsonar.login=$SONAR_LOGIN
