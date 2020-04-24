@@ -29,7 +29,7 @@ public class CandidatesController {
         Optional<Candidate> requestedMovie = repository.findById(movieId);
 
         if (requestedMovie.isPresent()){
-            List<Candidate> candidates = new LinkedList<Candidate>();
+            List<Candidate> candidates = new LinkedList<>();
             candidates.add(requestedMovie.get());
             List<Candidate> possibleCandidates;
 
