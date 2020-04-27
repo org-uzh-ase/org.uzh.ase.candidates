@@ -1,6 +1,9 @@
 package org.uzh.ase.candidates.repository;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +22,7 @@ public class CandidateRepositoryTest{
     CandidateRepository repository;
 
     private Candidate defaultCandidate = new Candidate();
+    
 
     @BeforeEach
     public void addTestingData() {
@@ -35,5 +39,16 @@ public class CandidateRepositoryTest{
         Candidate retrievedCandidate = repository.findById(defaultCandidate.getId()).get();
 
         assertTrue(retrievedCandidate.equals(defaultCandidate), "Candidate retrieved from the DB does not match the candidate that was inserted.");
+    }
+
+    @Test
+    public void testFindBygenre(){
+        List<Candidate> retrievedCandidates = repository.findBygenre(defaultCandidate.getGenre());
+
+        assertFalse(retrievedCandidates.isEmpty());
+
+        for (Candidate candidate : retrievedCandidates) {
+            assertTrue(candidate.getGenre().equals(defaultCandidate.getGenre()), "Candidate retrieved from the DB does not match the candidate that was inserted.");
+        }
     }
 }
