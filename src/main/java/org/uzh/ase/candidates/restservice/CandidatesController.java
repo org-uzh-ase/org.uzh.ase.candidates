@@ -17,7 +17,6 @@ import org.uzh.ase.candidates.repository.CandidateRepository;
 @RestController
 public class CandidatesController {
 
-
 	@Autowired
 	private CandidateRepository repository;
 
