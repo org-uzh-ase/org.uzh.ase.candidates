@@ -3,13 +3,13 @@ package org.uzh.ase.candidates.restservice;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,15 +29,27 @@ public class CandidateControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private CandidateRepository repository;
+    CandidateRepository repository;
+
+    private Candidate defaultCandidate = new Candidate();
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     Logger log = LoggerFactory.getLogger(CandidateControllerTest.class);
 
+    @BeforeEach
+    public void addTestingData() {
+        repository.save(defaultCandidate);
+    }
+
+    @AfterEach
+    public void deleteTestingData() {
+        repository.delete(defaultCandidate);
+    }
+
     @Test
     public void testCandidatesAPI() throws Exception {
-        String defaultCandidateID = new Candidate().getId();
+        String defaultCandidateID = defaultCandidate.getId();
         String urlPath = String.format("/api/candidates?movie_id=%s", defaultCandidateID);
         String httpResponse = this.restTemplate.getForObject("http://localhost:" + port + urlPath, String.class);
         List<Candidate> response = objectMapper.readValue(httpResponse, new TypeReference<List<Candidate>>(){});
@@ -45,10 +57,10 @@ public class CandidateControllerTest {
         log.debug("Response for \"" + urlPath + "\" is:\"" + httpResponse + "\"");
 
         assertTrue(response.size() == 4);
+
         assertTrue(new HashSet<Candidate>(response).size() == 4);
 
         assertThat(response).contains(new Candidate());
-
     }
 
     @Test
@@ -78,9 +90,9 @@ public class CandidateControllerTest {
 
     @Test
     public void testCandidatesLessThanThreeValidCandidates() throws Exception {
-        Candidate c1 = new Candidate("1", "https::/something", "rareGenre");
-        Candidate c2 = new Candidate("1", "https::/something", "rareGenre");
-        Candidate c3 = new Candidate("1", "https::/something", "rareGenre");
+        Candidate c1 = new Candidate("1", "https::/something", "rareGenre", "sometitle");
+        Candidate c2 = new Candidate("1", "https::/something", "rareGenre", "sometitle");
+        Candidate c3 = new Candidate("1", "https::/something", "rareGenre", "sometitle");
         repository.save(c1);
         repository.save(c2);
         repository.save(c3);
