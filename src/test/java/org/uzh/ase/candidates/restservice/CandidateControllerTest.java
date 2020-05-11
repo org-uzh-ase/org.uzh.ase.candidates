@@ -3,7 +3,9 @@ package org.uzh.ase.candidates.restservice;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,6 +49,12 @@ public class CandidateControllerTest {
         repository.delete(defaultCandidate);
     }
 
+   
+    /**
+     * Verify that an API returns correct number of responses
+     * and that it returns the required movie.
+     * @throws Exception HTTP response does not contain movie data
+     */
     @Test
     public void testCandidatesAPI() throws Exception {
         String defaultCandidateID = defaultCandidate.getId();
@@ -63,6 +71,11 @@ public class CandidateControllerTest {
         assertThat(response).contains(new Candidate());
     }
 
+    /**
+     * Veryfi that difficulty parameter returns movies with
+     * similar genres.
+     * @throws Exception HTTP response does not contain movie data
+     */
     @Test
     public void testCandidatesDifficulty() throws Exception {
         String urlPath = String.format("/api/candidates?movie_id=%s&level=2", "1002540"); // movie that has genre a documentary
@@ -76,6 +89,10 @@ public class CandidateControllerTest {
         }
     }
 
+    /**
+     * Verify that 404 response is returned if a requested movie does not exist.
+     * @throws Exception HTTP response does not contain failure response.
+     */
     @Test
     public void testCandidatesNonExistentMovie() throws Exception {
         String nonExistingID = "-1"; // I hope that this ID will not actually exist
@@ -88,6 +105,11 @@ public class CandidateControllerTest {
         assertTrue(response.get("status").equals("404"));
     }
 
+    /**
+     * Verify that 404 response is returned if less than 4 movies
+     * with the same genre exist.
+     * @throws Exception
+     */
     @Test
     public void testCandidatesLessThanThreeValidCandidates() throws Exception {
         Candidate c1 = new Candidate("1", "https::/something", "rareGenre", "sometitle");

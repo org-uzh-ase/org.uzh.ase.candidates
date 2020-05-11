@@ -14,12 +14,27 @@ import org.springframework.web.server.ResponseStatusException;
 import org.uzh.ase.candidates.model.Candidate;
 import org.uzh.ase.candidates.repository.CandidateRepository;
 
+/**
+ * Controller responsible for handling API requests.
+ */
 @RestController
 public class CandidatesController {
 
 	@Autowired
 	private CandidateRepository repository;
 
+    /**
+     * Method invoked for requests with "/api/candidates" path.
+     * 
+     * Extracts a requested movie from a DB, and finds 3 additional random movies,
+     * depending on the difficulty. HTTP response is 404 if requested movie
+     * cannot be found in the DB, OR we are not able to find more than 3
+     * movies with similar genres in case of difficulty != 1.
+     * @param movieId Requested movie IMDB ID.
+     * @param level Requested level of difficulty; 1 for random movies, 
+     * any other int for random movies with matching genres.
+     * @return HTTP response filled with 3 random movies and a requsted movie.
+     */
     @GetMapping("/api/candidates")
     public List<Candidate> getCandidates(
         @RequestParam(value = "movie_id") String movieId, 
@@ -54,6 +69,11 @@ public class CandidatesController {
 
     }
 
+    /**
+     * Generates 3 random and unique numbers from range [0, numOfCandidates]
+     * @param numOfCandidates Maximum range
+     * @return Int array of size 3, with random numbers from range [0, numOfCandidates]
+     */
     private int[] generateRandomIndices(int numOfCandidates) {
         
         int[] randomIndices = new int[3];

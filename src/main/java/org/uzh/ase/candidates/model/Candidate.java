@@ -5,6 +5,9 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Java object representation of a MongoDB entry, for "candidates" collection.
+ */
 @Document(collection = "candidates")
 public class Candidate {
 
@@ -14,6 +17,13 @@ public class Candidate {
     private String genre;
     private String title;
 
+    /**
+     * 
+     * @param id IMDB movie ID
+     * @param posterURL URL pointing to a poster representing the movie.
+     * @param genre Genre that represents the movie.
+     * @param title Title of the movie.
+     */
     public Candidate(String id, String posterURL, String genre, String title) {
         this.id = id;
         this.poster = posterURL;
