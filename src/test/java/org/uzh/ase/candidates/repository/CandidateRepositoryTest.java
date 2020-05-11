@@ -34,6 +34,10 @@ public class CandidateRepositoryTest{
         repository.delete(defaultCandidate);
     }
 
+    /**
+     * Verify that saved movie is equal to one that was retrieved.
+     * Verify that findByid() method returns movie with requested ID.
+     */
     @Test
     public void testFindByid(){
         Candidate retrievedCandidate = repository.findById(defaultCandidate.getId()).get();
@@ -41,6 +45,10 @@ public class CandidateRepositoryTest{
         assertTrue(retrievedCandidate.equals(defaultCandidate), "Candidate retrieved from the DB does not match the candidate that was inserted.");
     }
 
+    /**
+     * Verify that searching for movies by existing genres returns non-empty list
+     * and each of the movies returned has the same genre.
+     */
     @Test
     public void testFindBygenre(){
         List<Candidate> retrievedCandidates = repository.findBygenre(defaultCandidate.getGenre());

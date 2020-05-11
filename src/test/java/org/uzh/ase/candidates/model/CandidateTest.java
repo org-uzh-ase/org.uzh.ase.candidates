@@ -14,6 +14,13 @@ public class CandidateTest {
     private final String defaultGenre = "Documentary";
     private final String defaultTitle = "Title of the Movie";
 
+    /**
+     * Verify that constructor uses the expected default data.
+     * id = "42"
+     * poster = "https://images-na.ssl-images-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_UX182_CR0,0,182,268_AL_.jpg"
+     * genre = "Documentary"
+     * title = "Title of the Movie"
+     */
     @Test
     public void testNoArgConstructor(){
         Candidate candidate = new Candidate();
@@ -22,6 +29,10 @@ public class CandidateTest {
         assertEquals(defaultGenre, candidate.getGenre(), "Expected default value for genre is different.");
     }
 
+    /**
+     * Verify that a candidate built with custom arguments
+     * contains those arguments.
+     */
     @Test
     public void testArgConstructor(){
         // These values have to be different from the default ones to avoid, accidentally passing the tests
@@ -37,6 +48,10 @@ public class CandidateTest {
         assertEquals(title, candidate.getTitle(), "Expected value for Title used in constructor is different.");
     }
 
+    /**
+     * Verify that Candidate equals() method evaluates to true, only if all
+     * of the fields (id, poster, genre, title) hold identical values.
+     */
     @Test
     public void testEquals() { 
         Candidate c = new Candidate();
@@ -59,6 +74,10 @@ public class CandidateTest {
         assertTrue(c.equals(new Candidate(defaultID, defaultPosterURL, defaultGenre, defaultTitle)));
     }
 
+    /**
+     * Verify that Candidate hashCode() method evaluates to true, only if all
+     * of the fields (id, poster, genre, title) hold identical values.
+     */
     @Test
     public void testHashCode() {
         Candidate c = new Candidate();
