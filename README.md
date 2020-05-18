@@ -1,5 +1,5 @@
 # Candidates microservice
-Microservice responsible for randomly generating a list of Movies that should be used in the Quiz microservice. For an API specification see [Swagger](https://app.swaggerhub.com/apis/ltoedt/ASE/0.1).
+Microservice responsible for randomly generating a list of Movies that should be used in the Quiz microservice. For an API specification see [Swagger](https://app.swaggerhub.com/apis-docs/ltoedt/ASE/0.1).
 
 ## Getting started
 ### Prerequisites
