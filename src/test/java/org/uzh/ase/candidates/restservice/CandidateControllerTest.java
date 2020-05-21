@@ -72,7 +72,7 @@ public class CandidateControllerTest {
     }
 
     /**
-     * Veryfi that difficulty parameter returns movies with
+     * Verify that difficulty parameter returns movies with
      * similar genres.
      * @throws Exception HTTP response does not contain movie data
      */
@@ -90,7 +90,7 @@ public class CandidateControllerTest {
     }
 
     /**
-     * Verify that 404 response is returned if a requested movie does not exist.
+     * Verify that 409 response is returned if a requested movie does not exist.
      * @throws Exception HTTP response does not contain failure response.
      */
     @Test
@@ -102,11 +102,11 @@ public class CandidateControllerTest {
         
         log.debug("Response for \"" + urlPath + "\" is:\"" + httpResponse + "\"");
         
-        assertTrue(response.get("status").equals("404"));
+        assertTrue(response.get("status").equals("409"));
     }
 
     /**
-     * Verify that 404 response is returned if less than 4 movies
+     * Verify that 500 response is returned if less than 4 movies
      * with the same genre exist.
      * @throws Exception
      */
@@ -126,7 +126,7 @@ public class CandidateControllerTest {
         
         log.debug("Response for \"" + urlPath + "\" is:\"" + httpResponse + "\"");
         
-        assertTrue(response.get("status").equals("404"));
+        assertTrue(response.get("status").equals("500"));
         
         repository.delete(c1);
         repository.delete(c2);

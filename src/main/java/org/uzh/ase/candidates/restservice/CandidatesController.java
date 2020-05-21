@@ -33,7 +33,7 @@ public class CandidatesController {
      * @param movieId Requested movie IMDB ID.
      * @param level Requested level of difficulty; 1 for random movies, 
      * any other int for random movies with matching genres.
-     * @return HTTP response filled with 3 random movies and a requsted movie.
+     * @return HTTP response filled with 3 random movies and a requested movie.
      */
     @GetMapping("/api/candidates")
     public List<Candidate> getCandidates(
@@ -55,7 +55,7 @@ public class CandidatesController {
             possibleCandidates.remove(requestedMovie.get());
 
             if (possibleCandidates.size() < 3) { // check whether there are at least 3 candidates, otherwise request would get into a loop
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Number of candidates for the requested genre \"%s\" is less than 3.", requestedMovie.get().getGenre()));
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, String.format("Number of candidates for the requested genre \"%s\" is less than 3.", requestedMovie.get().getGenre()));
             }
 
             for (int i : generateRandomIndices(possibleCandidates.size())) {
@@ -64,7 +64,7 @@ public class CandidatesController {
             return candidates;
 
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Couldn't find movie with ID %s", movieId));
+            throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("Couldn't find movie with ID %s", movieId));
         }
 
     }
