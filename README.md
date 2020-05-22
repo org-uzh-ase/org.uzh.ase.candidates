@@ -5,11 +5,11 @@ Microservice responsible for randomly generating a list of Movies that should be
 ### Prerequisites
 - Java 11
 - Maven
-- Running MongoDB, to define connection details see `application-local.properties` if you are running JAR, or `application-cloud.properties` if you are using containers. The files are in `src/main/resources`. The database should contain data, that you can import from `src/main/resources/movies`, see [How to import data](##How-to-import-data-into-MongoDB) for more info.
+- Running MongoDB, to define connection details see `application-local.properties` if you are running JAR, or `application-cloud.properties` if you are using containers. The files are in `src/main/resources`. The database should contain data, that you can import from `src/main/resources/movies`, see [How to import data](#how-to-import-data-into-mongodb) for more info.
 
 
 ### Running
-We do not provide precompiled JARs, but you can use our pre-built container from [DockerHub](https://hub.docker.com/repository/docker/vladmasarik/candidates). If you are looking for JAR file, you need to build one yourself, see [building guide](##Building).
+We do not provide precompiled JARs, but you can use our pre-built container from [DockerHub](https://hub.docker.com/repository/docker/vladmasarik/candidates). If you are looking for JAR file, you need to build one yourself, see [building guide](#building).
 After you are done with building simply execute the JAR, for example:
 ```
 java -jar target/candidates-0.0.1-SNAPSHOT.jar
